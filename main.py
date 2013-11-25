@@ -4,7 +4,7 @@ import psycopg2
 import os
 import psycopg2
 import urlparse
-#import requests
+import requests
 
 app = Flask(__name__)
 # comment out when you're done testing
