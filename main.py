@@ -26,6 +26,7 @@ def oauth_authorized():
     import urlparse
 
     AUTHORIZATION_CODE = request.args.get('code')
+    code= AUTHORIZATION_CODE
     data = {
         "client_id":CONSUMER_ID,
         "client_secret":CONSUMER_SECRET,
@@ -55,7 +56,7 @@ def oauth_authorized():
 
     return 'You were signed in as %s' % user['username']
 
-def enterUser(name, email, phone, AUTHORIZATION_CODE):
+def enterUser(name, email, phone, code):
     #connect to DB
     urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
@@ -68,7 +69,7 @@ def enterUser(name, email, phone, AUTHORIZATION_CODE):
         port=url.port
     )
     cur = conn.cursor()
-    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, int(phone), AUTHORIZATION_CODE));
+    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, int(phone), code));
     cur.close()
     conn.close()
 
