@@ -54,7 +54,7 @@ def oauth_authorized():
     print name
     print email
     print phone
-    enterUser(name, email, phone, AUTHORIZATION_CODE)
+    enterUser(name, email, phone, code)
 
     return 'You were signed in as %s' % user['username']
 
