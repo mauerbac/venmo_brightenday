@@ -52,7 +52,11 @@ def oauth_authorized():
     name = user['name']
     email = user['email']
     phone= user['phone'] 
-
+    print "test"
+    print name
+    print email
+    print phone
+    
     return 'You were signed in as %s' % user['username']
 
 if __name__ == '__main__':
