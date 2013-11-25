@@ -1,6 +1,11 @@
 from flask import Flask, request, redirect, session
-from constants import CONSUMER_ID, CONSUMER_SECRET, APP_SECRET
+import constants 
 import requests
+import psycopg2
+from sqlalchemy import *
+import os
+import psycopg2
+import urlparse
 
 app = Flask(__name__)
 # comment out when you're done testing
@@ -21,16 +26,6 @@ def oauth_authorized():
     import psycopg2
     import urlparse
 
-    urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-    conn = psycopg2.connect(
-        database=url.path[1:],
-        user=url.username,
-        password=url.password,
-        host=url.hostname,
-        port=url.port
-    )
     AUTHORIZATION_CODE = request.args.get('code')
     data = {
         "client_id":CONSUMER_ID,
@@ -56,8 +51,29 @@ def oauth_authorized():
     print name
     print email
     print phone
-    
+    enterUser(name, email, phone, AUTHORIZATION_CODE)
+
     return 'You were signed in as %s' % user['username']
+
+def enterUser(name, email, phone, AUTHORIZATION_CODE):
+    #connect to DB
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+    conn = psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
+    cur = conn.cursor()
+    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, AUTHORIZATION_CODE));
+    cur.close()
+    conn.close()
+
+
+
 
 if __name__ == '__main__':
     app.run()
