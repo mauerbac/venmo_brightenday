@@ -36,6 +36,7 @@ def oauth_authorized():
     response_dict = response.json()
 
 
+
     access_token = response_dict.get('access_token')
     user = response_dict.get('user')
 
