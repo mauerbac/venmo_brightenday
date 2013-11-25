@@ -1,11 +1,10 @@
 from flask import Flask, request, redirect, session
-import constants 
-import requests
+from constants import CONSUMER_ID, CONSUMER_SECRET, APP_SECRET
 import psycopg2
-from sqlalchemy import *
 import os
 import psycopg2
 import urlparse
+#import requests
 
 app = Flask(__name__)
 # comment out when you're done testing
