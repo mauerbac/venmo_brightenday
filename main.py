@@ -27,6 +27,8 @@ def oauth_authorized():
 
     AUTHORIZATION_CODE = request.args.get('code')
     code= AUTHORIZATION_CODE
+    print (type(code))
+    print (code)
     data = {
         "client_id":CONSUMER_ID,
         "client_secret":CONSUMER_SECRET,
