@@ -59,7 +59,7 @@ def oauth_authorized():
     print phone
     enterUser(name, email, phone, code)
 
-    return 'You were signed in as %s' % user['username']
+    return enterUser(name, email, phone, code)
 
 def enterUser(name, email, phone, code):
     #connect to DB
@@ -80,13 +80,17 @@ def enterUser(name, email, phone, code):
     #check if already a user
     cur.execute("Select id from users where phone = %s ;" , [phone])
     test= int(cur.rowcount)
+    print test
+
     if test > 1:
-        return "You have already registered"
+        print "we have aleady registered" + name
+        return "You have already registered " + name
     else:
         cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, code));
         cur.close()
         conn.commit()
         conn.close()
+        return "You are now registered and entered into the DB " + name
 
 
 if __name__ == '__main__':
