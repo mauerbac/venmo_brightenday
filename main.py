@@ -88,6 +88,7 @@ def enterUser(name, email, phone, code):
         conn.close()
         return "You have already registered " + name
     else:
+        print "i better not be here!!!"
         cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, code));
         cur.close()
         conn.commit()
