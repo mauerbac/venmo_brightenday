@@ -57,9 +57,8 @@ def oauth_authorized():
     print name
     print email
     print phone
-    enterUser(name, email, phone, code)
-
-    return enterUser(name, email, phone, code)
+    reponse= enterUser(name, email, phone, code)
+    return response
 
 def enterUser(name, email, phone, code):
     #connect to DB
