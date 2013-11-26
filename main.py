@@ -71,10 +71,10 @@ def enterUser(name, email, phone, code):
         port=url.port
     )
     cur = conn.cursor()
-    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, int(phone), code));
+    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%d, %s)",(name,email, int(phone), code));
     cur.close()
     conn.close()
-      
+
 
 
 
