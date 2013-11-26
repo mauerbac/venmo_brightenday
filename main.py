@@ -57,7 +57,7 @@ def oauth_authorized():
     print name
     print email
     print phone
-    reponse= enterUser(name, email, phone, code)
+    response= enterUser(name, email, phone, code)
     return response
 
 def enterUser(name, email, phone, code):
