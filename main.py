@@ -48,7 +48,7 @@ def oauth_authorized():
     session['venmo_token'] = access_token
 
 
-    session['venmo_username'] = user['username']
+    #session['venmo_username'] = user['username']
 
     name = user['name']
     email = user['email']
