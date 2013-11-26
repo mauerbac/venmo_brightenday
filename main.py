@@ -78,7 +78,7 @@ def enterUser(name, email, phone, code):
     cur = conn.cursor()
 
     #check if already a user
-    cur.execute("Select id from users where phone = %s " , (phone));
+    cur.execute("Select id from users where phone = %s ;" , [phone])
     test= int(cur.rowcount)
     if test > 1:
         return "You have already registered"
