@@ -80,7 +80,7 @@ def enterUser(name, email, phone, code):
     #check if already a user
     cur.execute("Select id from users where phone = %s ;" , [phone])
     test= int(cur.rowcount)
-    print "the number of rows" + test
+    print "the number of rows" + str(test)
 
     if test > 1:
         print "we have aleady registered" + name
