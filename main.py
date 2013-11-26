@@ -80,10 +80,13 @@ def enterUser(name, email, phone, code):
     #check if already a user
     cur.execute("Select id from users where phone = %s ;" , [phone])
     test= int(cur.rowcount)
-    print test
+    print "the number of rows" + test
 
     if test > 1:
         print "we have aleady registered" + name
+        cur.close()
+        conn.commit()
+        conn.close()
         return "You have already registered " + name
     else:
         cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, code));
