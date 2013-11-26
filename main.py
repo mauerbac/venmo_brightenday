@@ -73,13 +73,14 @@ def enterUser(name, email, phone, code):
         host=url.hostname,
         port=url.port
     )
+    print type(phone)
     phone = int(phone)
     cur = conn.cursor()
 
     #check if already a user
     cur.execute("Select id from users where phone = %s " , (phone));
-    test= bool(cur.rowcount)
-    if test:
+    test= int(cur.rowcount)
+    if test > 1:
         return "You have already registered"
     else:
         cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, code));
