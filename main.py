@@ -40,11 +40,14 @@ def oauth_authorized():
 
 
 
+    #the current users access token
     access_token = response_dict.get('access_token')
     user = response_dict.get('user')
 
 
     session['venmo_token'] = access_token
+
+
     session['venmo_username'] = user['username']
 
     name = user['name']
@@ -61,7 +64,7 @@ def oauth_authorized():
 def enterUser(name, email, phone, code):
     #connect to DB
     urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    url = urlparse.urlparse(os.environ["postgres://vdadmenrteqkyd:B_k4N7S33S_C9VgE1-EXNfCA7i@ec2-54-221-206-165.compute-1.amazonaws.com:5432/da646h3t8rv8ta"])
 
     conn = psycopg2.connect(
         database=url.path[1:],
@@ -73,6 +76,7 @@ def enterUser(name, email, phone, code):
 
     cur = conn.cursor()
     cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, code));
+    conn.commit()
     cur.close()
     conn.close()
 
