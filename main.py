@@ -70,9 +70,7 @@ def enterUser(name, email, phone, code):
         host=url.hostname,
         port=url.port
     )
-    phone= int(phone)
-    print type(phone)
-    print phone
+
     cur = conn.cursor()
     cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%s, %s)",(name,email, phone, code));
     cur.close()
