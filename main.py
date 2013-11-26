@@ -73,7 +73,7 @@ def enterUser(name, email, phone, code):
     phone= int(phone)
     print type(phone)
     cur = conn.cursor()
-    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%d, %s)",(name,email, phone, code));
+    cur.execute("INSERT INTO users (name, email, phone, code) VALUES (%s, %s,%(int)s, %s)",(name,email, phone, code));
     cur.close()
     conn.close()
 
